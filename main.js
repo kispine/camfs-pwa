@@ -20,20 +20,24 @@ let fullscreen = false
 const requestFullscreen = elem => {
     if (elem.requestFullscreen) {
         elem.requestFullscreen()
-      } else if (elem.webkitRequestFullscreen) {
+    } else if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen()
-      } else if (elem.msRequestFullscreen) {
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen()
+    } else if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen()
-      }
+    }
 }
 const exitFullscreen = elem => {
     if (elem.exitFullscreen) {
-        elem.exitFullscreen()
-      } else if (elem.webkitExitFullscreen) {
+        Document.exitFullscreen()
+    } else if (elem.webkitExitFullscreen) {
         elem.webkitExitFullscreen()
-      } else if (elem.msExitFullscreen) {
+    } else if (elem.mozCancelFullScreen) {
+        elem.mozCancelFullScreen() 
+    } else if (elem.msExitFullscreen) {
         elem.msExitFullscreen()
-      }
+    }
 }
 const toggleFullscreen = (elem) => {
     if (!fullscreen) {
@@ -55,6 +59,12 @@ if ('serviceWorker' in navigator) {
 
 window.addEventListener('load', () => {
     const video = document.querySelector('.video')
-    document.addEventListener('keydown', () => toggleFullscreen(video))
+    document.addEventListener('keydown', (e) => toggleFullscreen(video))
+    document.addEventListener('click', (e) => {
+      e.preventDefault()
+      if (e.button === 0) {
+        toggleFullscreen(video)
+      }
+    })
     initCamera(video)
 })
