@@ -20,10 +20,13 @@ const initCamera = async () => {
 }
 
 if ('serviceWorker' in navigator) {
-    window.onload = () => {
+    window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
-    }
-    
+            .then(res => console.log("service worker registered"))
+            .catch(err => console.log("service worker not registered", err))
+    })    
 }
 
-window.onload = initCamera
+window.addEventListener('load', () => {
+    initCamera()
+})
