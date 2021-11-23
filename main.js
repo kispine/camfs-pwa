@@ -42,7 +42,6 @@ const toggleFullscreen = (elem) => {
         exitFullscreen(elem)
     }
     fullscreen = !fullscreen
-    console.log(fullscreen)
 }
 
 if ('serviceWorker' in navigator) {
@@ -56,6 +55,6 @@ if ('serviceWorker' in navigator) {
 
 window.addEventListener('load', () => {
     const video = document.querySelector('.video')
-    window.addEventListener('keydown', () => toggleFullscreen(video))
+    document.addEventListener('keydown', () => toggleFullscreen(video))
     initCamera(video)
 })
