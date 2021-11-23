@@ -56,6 +56,6 @@ if ('serviceWorker' in navigator) {
 
 window.addEventListener('load', () => {
     const video = document.querySelector('.video')
-    document.addEventListener('keydown', () => toggleFullscreen(video))
+    window.addEventListener('keydown', () => toggleFullscreen(video))
     initCamera(video)
 })
