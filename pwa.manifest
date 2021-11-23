@@ -1,0 +1,16 @@
+{
+    "name": "Fullscreen camera PWA",
+    "short_name": "camera-fs-pwa",
+    "description": "Fullscreen camera PWA",
+    "icons": [
+        {
+            "src": "icons/webcam.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/index.html",
+    "display": "fullscreen",
+    "theme_color": "#B12A34",
+    "background_color": "#B12A34"
+}
