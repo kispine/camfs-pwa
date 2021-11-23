@@ -29,10 +29,8 @@ const requestFullscreen = elem => {
     }
 }
 const exitFullscreen = elem => {
-    if (elem.exitFullscreen) {
+    if (Document.exitFullscreen) {
         Document.exitFullscreen()
-    } else if (elem.webkitExitFullscreen) {
-        elem.webkitExitFullscreen()
     } else if (elem.mozCancelFullScreen) {
         elem.mozCancelFullScreen() 
     } else if (elem.msExitFullscreen) {
@@ -40,11 +38,7 @@ const exitFullscreen = elem => {
     }
 }
 const toggleFullscreen = (elem) => {
-    if (!fullscreen) {
-        requestFullscreen(elem)
-    } else {
-        exitFullscreen(elem)
-    }
+    fullscreen ? exitFullscreen(elem) : requestFullscreen(elem)
     fullscreen = !fullscreen
 }
 
@@ -52,8 +46,8 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('./sw.js')
-      .then((res) => console.log('service worker registered'))
-      .catch((err) => console.log('service worker not registered', err))
+      .then(() => console.log('service worker registered'))
+      .catch(err => console.log('service worker not registered', err))
   })
 }
 
