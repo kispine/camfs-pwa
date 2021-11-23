@@ -2,11 +2,11 @@ const PRECACHE = 'camfs-precache-v1'
 const RUNTIME = 'runtime'
 
 const PRECACHE_URLS = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/main.js',
-  '/icons/webcam.png'
+  './',
+  './index.html',
+  './styles.css',
+  './main.js',
+  './icons/webcam.png'
 ]
 
 self.addEventListener('install', event => {
