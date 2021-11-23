@@ -4,7 +4,7 @@ const RUNTIME = 'runtime'
 const PRECACHE_URLS = [
   './',
   './index.html',
-  './styles.css',
+  './style.css',
   './main.js',
   './icons/webcam.png'
 ]
