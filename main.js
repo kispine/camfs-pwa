@@ -16,11 +16,33 @@ const initCamera = async (video) => {
   }
 }
 
-const openFullscreen = (elem) => {
-    elem.requestFullscreen()
-
-    elem.addEventListener('mousedown', () => elem.exitFullscreen())
-    elem.addEventListener('keydown', () => elem.exitFullscreen())
+let fullscreen = false
+const requestFullscreen = elem => {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen()
+      } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen()
+      } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen()
+      }
+}
+const exitFullscreen = elem => {
+    if (elem.exitFullscreen) {
+        elem.exitFullscreen()
+      } else if (elem.webkitExitFullscreen) {
+        elem.webkitExitFullscreen()
+      } else if (elem.msExitFullscreen) {
+        elem.msExitFullscreen()
+      }
+}
+const toggleFullscreen = (elem) => {
+    if (!fullscreen) {
+        requestFullscreen(elem)
+    } else {
+        exitFullscreen(elem)
+    }
+    fullscreen = !fullscreen
+    console.log(fullscreen)
 }
 
 if ('serviceWorker' in navigator) {
@@ -29,11 +51,11 @@ if ('serviceWorker' in navigator) {
       .register('./sw.js')
       .then((res) => console.log('service worker registered'))
       .catch((err) => console.log('service worker not registered', err))
-  });
+  })
 }
 
 window.addEventListener('load', () => {
     const video = document.querySelector('.video')
-    openFullscreen(video)
+    document.addEventListener('keydown', () => toggleFullscreen(video))
     initCamera(video)
 })
